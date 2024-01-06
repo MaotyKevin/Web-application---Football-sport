@@ -8,10 +8,6 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 from bd_base import Handle_database
 
-app = Flask(__name__)
-api = Api(app)
-cors = CORS(app, resources={r"/ligue/*": {"origins": "http://localhost:3000"}} )
-
 
 class LigueResource(Resource):
     def __init__(self):
@@ -58,7 +54,4 @@ class LigueResource(Resource):
     def __del__(self):
         self.conn.close()
 
-api.add_resource(LigueResource, '/ligue', '/ligue/<int:ligue_id>')
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
