@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import apiService from '../Services/Api';
 
+
 const LigueList = () => {
   const [ligues, setLigues] = useState([]);
   const [updateLigueId, setUpdateLigueId] = useState('');
   const [updatedLigueName, setUpdatedLigueName] = useState('');
+  const [newLigue, setNewLigue] = useState('');
 
   useEffect(() => {
   
@@ -14,13 +16,26 @@ const LigueList = () => {
   
 
   const fetchLigues = () => {
-    apiService.get()
-      .then(response => {setLigues(response.data) ;console.log('Response data:', response.data);})
+    apiService.ligue.get()
+      .then(
+        response => {setLigues(response.data) ;
+        console.log('Response data:', response.data);})
+
       .catch(error => console.error('Error fetching ligues:', error));
   };
 
+  const handleAddLigue = () => {
+    apiService.ligue.post(newLigue)
+      .then(response => {
+        console.log(response.data.message);
+        
+        
+      })
+      .catch(error => console.error('Error adding ligue:', error));
+  };
+
   const handleDeleteLigue = (ligue_id) => {
-    apiService.delete(ligue_id)
+    apiService.ligue.delete(ligue_id)
       .then(response => {
         console.log(response.data.message);
         fetchLigues();
@@ -29,7 +44,7 @@ const LigueList = () => {
   };
 
   const handleUpdateLigue = (ligue_id) => {
-    apiService.put(ligue_id, updatedLigueName)
+    apiService.ligue.put(ligue_id, updatedLigueName)
       .then(response => {
         console.log(response.data.message);
         fetchLigues();
@@ -67,7 +82,17 @@ const LigueList = () => {
           </li>
         ))}
       </ul>
+
+    
+      
+      <div>
+        <h1>Add new ligue</h1>
+        <input type="text" value={newLigue} onChange={(e) => setNewLigue(e.target.value)} />
+        <button onClick={handleAddLigue}>Confirm adding</button>
+      </div>
     </div>
+
+   
   );
 };
 
