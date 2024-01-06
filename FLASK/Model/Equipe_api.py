@@ -8,8 +8,6 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 from bd_base import Handle_database
 
-
-
 class EquipeResource(Resource):
     def __init__(self):
         self.Handle = Handle_database()
