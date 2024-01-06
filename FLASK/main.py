@@ -9,6 +9,7 @@ from Model.EquipeLigue_api import EquipeLigueResource
 from Model.Poste_api import Poste_Resource
 from Model.Match_api import Match_Ressource
 from Model.EquipeMatch_api import EquipeMatchOne_Resource , EquipeMatchTwo_Resource
+from Model.EquipeTitulaire_api import Equipe_titulaireOne_Resource , Equipe_titulaireTwo_Resource
 
 app = Flask(__name__)
 api = Api(app)
@@ -27,6 +28,10 @@ api.add_resource(Match_Ressource , '/match'  )
 api.add_resource(EquipeMatchOne_Resource , '/equipesMatchOne/<int:team_id>' )
 
 api.add_resource(EquipeMatchTwo_Resource , '/equipesMatchTwo/<int:team_id>'  )
+
+api.add_resource(Equipe_titulaireOne_Resource , '/equipesTitulaireOne/<int:team_id>' )
+
+api.add_resource(Equipe_titulaireTwo_Resource , '/equipesTitulaireTwo/<int:team_id>'  )
 
 
 if __name__ == '__main__':
