@@ -6,6 +6,7 @@ import sys , os
 from Model.Ligue_api import LigueResource
 from Model.Equipe_api import EquipeResource
 from Model.EquipeLigue_api import EquipeLigueResource
+from Model.Poste_api import Poste_Resource
 
 app = Flask(__name__)
 api = Api(app)
@@ -16,6 +17,8 @@ api.add_resource(LigueResource, '/ligue', '/ligue/<int:ligue_id>')
 api.add_resource(EquipeResource, '/equipes', '/equipes/<int:equipe_id>' )
 
 api.add_resource(EquipeLigueResource , '/equipesLigue/<int:ligue_id>' )
+
+api.add_resource(Poste_Resource , '/poste' , '/poste/<int:poste_id>' )
 
 
 if __name__ == '__main__':
