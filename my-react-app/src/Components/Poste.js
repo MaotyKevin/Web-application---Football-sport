@@ -1,15 +1,20 @@
 // PosteComponent.js
 import React, { useState, useEffect } from 'react';
 import apiService from '../Services/Api';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
 
 const PosteComponent = () => {
   const [postes, setPostes] = useState([]);
   const [updatePosteId , setUpdatePOsteId] = useState('');
   const [updatePosteNames , setUpdatePosteNames] = useState('')
   const [newPostes, setNewPoste] = useState('');
+  const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    // Fetch postes when the component mounts
     fetchPostes();
   }, []);
 
@@ -25,10 +30,10 @@ const PosteComponent = () => {
   const handleAddPoste = async () => {
     try {
       await apiService.poste.post(newPostes);
-      // After adding a new poste, fetch postes again to update the list
       fetchPostes();
-      // Clear the input field
       setNewPoste('');
+      setIsAdding(false);
+
     } catch (error) {
       console.error('Error adding poste:', error);
     }
@@ -37,7 +42,6 @@ const PosteComponent = () => {
   const handleDeletePoste = async (poste_id) => {
     try {
       await apiService.poste.delete(poste_id);
-      // After deleting a poste, fetch postes again to update the list
       fetchPostes();
     } catch (error) {
       console.error('Error deleting poste:', error);
@@ -56,41 +60,53 @@ const PosteComponent = () => {
       setUpdatePosteNames('');
     };
 
-  return (
-    <div>
-      <h2>Postes</h2>
-      <ul>
-        {postes.map((poste) => (
-          <li key={poste[0]}>
-            {poste[1]}
-            <button onClick={() => handleDeletePoste(poste[0])}>Delete</button>
-
-            <button onClick={() => setUpdatePOsteId(poste[0])}>Update</button>
-
-            {updatePosteId === poste[0] && (
-              <div>
-                <input
-                  type="text"
-                  placeholder="Updated Poste Name"
-                  value={updatePosteNames}
-                  onChange={(e) => setUpdatePosteNames(e.target.value)}
-                />
-                <button onClick={() => handleUpdatePoste(poste[0])}>Save</button>
-              </div>
-            )}
-
-          </li>
-        ))}
-      </ul>
+  const renderAddPostePopup = () => {
+    return (
       <div>
-        <input
+        <TextField
           type="text"
+          label="New Poste Name"
           value={newPostes}
           onChange={(e) => setNewPoste(e.target.value)}
-          placeholder="Enter new poste"
         />
-        <button onClick={handleAddPoste}>Add Poste</button>
+        <Button onClick={handleAddPoste}>Add Poste</Button>
       </div>
+    );
+  };
+
+  return (
+    <div>
+      <h1>Postes</h1>
+      {isAdding ? (
+        renderAddPostePopup()
+      ) : (
+        <Button onClick={() => setIsAdding(true)}>Add New Poste</Button>
+      )}
+      <Grid container spacing={2}>
+        {postes.map(poste => (
+          <Grid item xs={12} sm={6} md={4} key={poste[0]}>
+            <Card>
+              <CardContent>
+                {poste[1]}
+                <Button onClick={() => setUpdatePOsteId(poste[0])}>Update</Button>
+                <Button onClick={() => handleDeletePoste(poste[0])}>Delete</Button>
+
+                {updatePosteId === poste[0] && (
+                  <div>
+                    <TextField
+                      type="text"
+                      placeholder="Updated Poste Name"
+                      value={updatePosteNames}
+                      onChange={(e) => setUpdatePosteNames(e.target.value)}
+                    />
+                    <Button onClick={() => handleUpdatePoste(poste[0])}>Save</Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 

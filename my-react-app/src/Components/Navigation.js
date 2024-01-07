@@ -5,13 +5,13 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import EmojiFlagsIcon from '@mui/icons-material/EmojiFlags';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -22,7 +22,6 @@ import LigueList from './Ligue_list';
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
-  const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState('Ligue'); // Default selected item
 
@@ -49,7 +48,7 @@ function ResponsiveDrawer(props) {
           >
             <ListItemButton>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index % 2 === 0 ? <EmojiFlagsIcon /> : <SportsSoccerIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -76,6 +75,7 @@ function ResponsiveDrawer(props) {
       <AppBar
         position="fixed"
         sx={{
+          backgroundColor : '#16697A',
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
@@ -91,7 +91,7 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            Football federation
           </Typography>
         </Toolbar>
       </AppBar>
