@@ -16,8 +16,9 @@ const apiEndpoints = {
     getById: (ligue_id) => `/ligue/${ligue_id}`,
   },
 
-  equipe: {
+  equipes: {
     getAll: '/equipes',
+    create: '/equipes',
     getById: (equipe_id) => `/equipes/${equipe_id}`,
   },
 
@@ -54,10 +55,10 @@ const apiService = {
     put: (ligue_id, updatedLigueName) => api.put(apiEndpoints.ligue.getById(ligue_id), { ligue_nom: updatedLigueName }),
   },
 
-  equipe: {
-    get: () => api.get(apiEndpoints.equipe.getAll),
-    delete: (equipe_id) => api.delete(apiEndpoints.equipe.getById(equipe_id)),
-    post: (team_name , ligue_id) => api.post(apiEndpoints.getAll , {team_name: team_name , ligue_id : ligue_id})
+  equipes: {
+    get: () => api.get(apiEndpoints.equipes.getAll),
+    delete: (equipe_id) => api.delete(apiEndpoints.equipes.getById(equipe_id)),
+    post: (team_name , ligue_id) => api.post(apiEndpoints.equipes.create , {team_name: team_name , ligue_id : ligue_id}),
   },
 
 

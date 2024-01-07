@@ -15,9 +15,11 @@ import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
 
 import PosteComponent from './Poste';
 import LigueList from './Ligue_list';
+import EquipeList from './Equipe';
 
 const drawerWidth = 240;
 
@@ -39,7 +41,7 @@ function ResponsiveDrawer(props) {
       <Toolbar />
       <Divider />
       <List>
-        {['Ligue', 'Poste'].map((text, index) => (
+        {['Ligue', 'Poste' , 'Equipes'].map((text, index) => (
           <ListItem
             key={text}
             disablePadding
@@ -48,7 +50,7 @@ function ResponsiveDrawer(props) {
           >
             <ListItemButton>
               <ListItemIcon>
-                {index % 2 === 0 ? <EmojiFlagsIcon /> : <SportsSoccerIcon />}
+                {index % 3 === 0 ? <EmojiFlagsIcon /> : index % 3 === 1 ? <SportsSoccerIcon /> : <Diversity3Icon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -64,6 +66,8 @@ function ResponsiveDrawer(props) {
         return <LigueList />;
       case 'Poste':
         return <PosteComponent />;
+      case 'Equipes':
+        return <EquipeList/>;
       default:
         return null;
     }

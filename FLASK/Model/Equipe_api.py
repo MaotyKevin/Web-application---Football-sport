@@ -28,14 +28,14 @@ class EquipeResource(Resource):
 
     def get(self):
         query = """
-            SELECT team_id, team_name, ligue_id FROM Equipe
+            SELECT team_id, team_name , ligue_id FROM Equipe
         """
         self.cursor.execute(query)
         data = self.cursor.fetchall()
 
         results = []
         for datas in data:
-            team_id, team_name, ligue_id = datas
+            team_id, team_name,ligue_id = datas
             ligue_nom = self.ligue_nom(ligue_id)
 
 

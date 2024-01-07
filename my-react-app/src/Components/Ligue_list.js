@@ -93,7 +93,7 @@ const LigueList = () => {
                   <div>
                     <TextField
                       type="text"
-                      placeholder="Updated Ligue Name"
+                      label={`${ligue[1]}`}
                       value={updatedLigueName}
                       onChange={(e) => setUpdatedLigueName(e.target.value)}
                     />
