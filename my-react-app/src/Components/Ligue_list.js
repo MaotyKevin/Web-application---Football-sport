@@ -31,7 +31,7 @@ const LigueList = () => {
       .then(response => {
         console.log(response.data.message);
         fetchLigues();
-        setLigues('');
+        setNewLigue('');
         setIsAdding(false);
       })
       .catch(error => console.error('Error adding ligue:', error));

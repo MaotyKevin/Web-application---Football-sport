@@ -64,7 +64,7 @@ class EquipeResource(Resource):
         ligue_id = data['ligue_id']
         try:
             insert_query = """
-                INSERT INTO Equipe (team_name , ligue_id ) VALUES (? , ? , ?)
+                INSERT INTO Equipe (team_name , ligue_id ) VALUES ( ? , ?)
             """
             self.cursor.execute(insert_query , (team_name  , ligue_id,))
             self.conn.commit()

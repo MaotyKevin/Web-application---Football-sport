@@ -7,8 +7,9 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 
 const EquipeList = () => {
-  const [equipes, setEquipe] = useState([]);
-  const [team_name, setNewEquipeName] = useState('');
+  const [team, setEquipe] = useState([]);
+
+  const [new_team_name, setNewEquipeName] = useState('');
   const [ligue_id , setNewLigueID] = useState(0);
   const [isAdding, setIsAdding] = useState(false);
 
@@ -26,7 +27,7 @@ const EquipeList = () => {
   };
 
   const handleAddEquipe= () => {
-    apiService.equipes.post(team_name , ligue_id)
+    apiService.equipes.post(new_team_name , ligue_id)
       .then(response => {
         console.log(response.data.message);
         fetchEquipe();
@@ -54,7 +55,7 @@ const EquipeList = () => {
         <TextField
           type="text"
           label="New equipe Name"
-          value={team_name}
+          value={new_team_name}
           onChange={(e) => setNewEquipeName(e.target.value)}
         />
         <TextField
@@ -78,7 +79,7 @@ const EquipeList = () => {
         <Button onClick={() => setIsAdding(true)}>Add New equipe</Button>
       )}
       <Grid container spacing={2}>
-        {equipes.map(equipe => (
+        {team.map(equipe => (
           <Grid item xs={12} sm={6} md={4} key={equipe.team_id}>
             <Card>
               <CardContent>

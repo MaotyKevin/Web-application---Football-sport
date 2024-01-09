@@ -58,7 +58,7 @@ const apiService = {
   equipes: {
     get: () => api.get(apiEndpoints.equipes.getAll),
     delete: (equipe_id) => api.delete(apiEndpoints.equipes.getById(equipe_id)),
-    post: (team_name , ligue_id) => api.post(apiEndpoints.equipes.create , {team_name: team_name , ligue_id : ligue_id}),
+    post: (new_team_name , ligue_id) => api.post(apiEndpoints.equipes.create , {team_name: new_team_name , ligue_id : ligue_id}),
   },
 
 
