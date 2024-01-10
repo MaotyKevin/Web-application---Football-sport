@@ -6,12 +6,17 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 
+import TeamPlayersModal from './TeamPlayersModal';
+
 const EquipeList = () => {
   const [team, setEquipe] = useState([]);
 
   const [new_team_name, setNewEquipeName] = useState('');
   const [ligue_id , setNewLigueID] = useState(0);
   const [isAdding, setIsAdding] = useState(false);
+
+  const [isModalOpen, setModalOpen] = useState(false); // State for controlling the modal
+  const [selectedTeamId, setSelectedTeamId] = useState(null);
 
   useEffect(() => {
     fetchEquipe();
@@ -47,6 +52,10 @@ const EquipeList = () => {
       .catch(error => console.error('Error deleting equipe:', error));
   };
 
+  const handleDetailsClick = (equipe_id) => {
+    setModalOpen(true);
+    setSelectedTeamId(equipe_id);
+  };
 
 
   const renderAddEquipePopup = () => {
@@ -84,6 +93,8 @@ const EquipeList = () => {
             <Card>
               <CardContent>
                 {equipe.team_name}
+
+                <Button onClick={() => handleDetailsClick(equipe.team_id)}>Details</Button>
                 
                 <Button onClick={() => handleDeleteEquipe(equipe.team_id)}>Delete</Button>
 
@@ -93,6 +104,15 @@ const EquipeList = () => {
           </Grid>
         ))}
       </Grid>
+
+      {/* Render the TeamPlayersModal */}
+      <TeamPlayersModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        teamId={selectedTeamId}
+      />
+
+
     </div>
   );
 };

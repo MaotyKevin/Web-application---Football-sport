@@ -72,9 +72,26 @@ class EquipeResource(Resource):
             return ({'message':'Team added'}), 201
         except sqlite3.Error as e:
             return ({'error': f"Error adding team: {e}"}), 500
+        
 
     
     def __del__(self):
         self.conn.close()
+
+class EquipeINdividualResource(Resource):
+    def __init__(self):
+        self.Handle = Handle_database()
+        self.conn, self.cursor = self.Handle.connecterBD()
+
+    def get(self , team_id):
+        query = """
+            SELECT team_id, team_name FROM Equipe WHERE team_id = ?
+        """
+        self.cursor.execute(query , (team_id,))
+        data = self.cursor.fetchall()
+
+
+
+        return data
 
 

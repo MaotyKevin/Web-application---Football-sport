@@ -4,12 +4,13 @@ from flask_restful import Resource, Api
 import sys , os
 
 from Model.Ligue_api import LigueResource
-from Model.Equipe_api import EquipeResource
+from Model.Equipe_api import EquipeResource , EquipeINdividualResource
 from Model.EquipeLigue_api import EquipeLigueResource
 from Model.Poste_api import Poste_Resource
 from Model.Match_api import Match_Ressource
 from Model.EquipeMatch_api import EquipeMatchOne_Resource , EquipeMatchTwo_Resource
 from Model.EquipeTitulaire_api import Equipe_titulaireOne_Resource , Equipe_titulaireTwo_Resource
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -18,6 +19,8 @@ cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}} )
 api.add_resource(LigueResource, '/ligue', '/ligue/<int:ligue_id>')
 
 api.add_resource(EquipeResource, '/equipes', '/equipes/<int:equipe_id>' )
+
+api.add_resource(EquipeINdividualResource, '/equipeIndividual/<int:team_id>' )
 
 api.add_resource(EquipeLigueResource , '/equipesLigue/<int:ligue_id>' )
 

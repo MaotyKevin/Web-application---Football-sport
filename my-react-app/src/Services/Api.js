@@ -22,6 +22,10 @@ const apiEndpoints = {
     getById: (equipe_id) => `/equipes/${equipe_id}`,
   },
 
+  individual: {
+    getById: (equipe_id) => `/equipeIndividual/${equipe_id}`
+  },
+
   equipeLigue: (ligue_id) => `/equipesLigue/${ligue_id}`,
 
   poste: {
@@ -59,6 +63,10 @@ const apiService = {
     get: () => api.get(apiEndpoints.equipes.getAll),
     delete: (equipe_id) => api.delete(apiEndpoints.equipes.getById(equipe_id)),
     post: (new_team_name , ligue_id) => api.post(apiEndpoints.equipes.create , {team_name: new_team_name , ligue_id : ligue_id}),
+  },
+
+  individual: {
+    get : (equipe_id) => api.get(apiEndpoints.individual.getById(equipe_id))
   },
 
 
