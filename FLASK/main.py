@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_restful import Resource, Api
 import sys , os
+from dotenv import load_dotenv
 
 from Model.Ligue_api import LigueResource
 from Model.Equipe_api import EquipeResource , EquipeINdividualResource
@@ -11,7 +12,7 @@ from Model.Match_api import Match_Ressource
 from Model.EquipeMatch_api import EquipeMatchOne_Resource , EquipeMatchTwo_Resource
 from Model.EquipeTitulaire_api import Equipe_titulaireOne_Resource , Equipe_titulaireTwo_Resource
 
-
+load_dotenv()
 app = Flask(__name__)
 api = Api(app)
 cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}} )
@@ -37,5 +38,12 @@ api.add_resource(Equipe_titulaireOne_Resource , '/equipesTitulaireOne/<int:team_
 api.add_resource(Equipe_titulaireTwo_Resource , '/equipesTitulaireTwo/<int:team_id>'  )
 
 
+debug = os.getenv('DEBUG', 'False').lower() == 'true'
+host = os.getenv('host', '0.0.0.0')
+port = int(os.getenv('port', 8080))
+
+
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host=host, port=port, debug=debug)

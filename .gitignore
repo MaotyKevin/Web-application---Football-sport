@@ -3,5 +3,7 @@ FLASK/venvMInt
 FLASK/__pycache__
 FLASK/Model/__init__.py
 FLASK/templates
+FLASK/.env
 my-react-app/node_modules
 my-react-app/package-lock.json
+my-react-app/.env
