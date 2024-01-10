@@ -6,6 +6,9 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import TeamPlayersModal from './TeamPlayersModal';
 
 const EquipeList = () => {
@@ -96,7 +99,9 @@ const EquipeList = () => {
 
                 <Button onClick={() => handleDetailsClick(equipe.team_id)}>Details</Button>
                 
-                <Button onClick={() => handleDeleteEquipe(equipe.team_id)}>Delete</Button>
+                <IconButton aria-label="delete" onClick={() => handleDeleteEquipe(equipe.team_id)}>
+                  <DeleteIcon />
+                </IconButton>
 
                 
               </CardContent>
