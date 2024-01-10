@@ -7,12 +7,24 @@ This web application revolves around sports activities, primarily focusing on fo
 
 ## Getting Started
 
-### Prerequisites
+### Prerequies 
 
 Make sure you have the following installed on your machine:
 
-- [Docker](https://www.docker.com/get-started)
-- [Docker Compose](https://docs.docker.com/compose/install/)
+1. Node Js :
+
+    ```bash
+    sudo apt update
+    sudo apt install nodejs
+    sudo apt install npm
+    ```
+
+2. Python3 :
+
+    ```bash
+    sudo apt install python3
+    ```
+
 
 ### Installation
 
@@ -28,13 +40,20 @@ Make sure you have the following installed on your machine:
     cd Web-application---Football-sport
     ```
 
-3. Build and run the Docker containers:
+3. For the backend :
 
     ```bash
-    sudo docker-compose up -d
+    cd FLASK
+    pip3 install -r requirements.txt
     ```
 
-4. Access the application at [http://localhost:3000](http://localhost:3000) in your web browser.
+4. For the frontend :
+
+    ```bash
+    cd my-react-app
+    npm install
+    npm start
+    ```
 
 ## Usage
 
