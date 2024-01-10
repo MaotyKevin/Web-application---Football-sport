@@ -6,6 +6,13 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import InfoIcon from '@mui/icons-material/Info';
+
+import '../Css/Ligue.css'
+
+
 const LigueList = () => {
   const [ligues, setLigues] = useState([]);
   const [updateLigueId, setUpdateLigueId] = useState('');
@@ -87,7 +94,9 @@ const LigueList = () => {
               <CardContent>
                 {ligue[1]}
                 <Button onClick={() => setUpdateLigueId(ligue[0])}>Update</Button>
-                <Button onClick={() => handleDeleteLigue(ligue[0])}>Delete</Button>
+                <IconButton aria-label="delete" onClick={() => handleDeleteLigue(ligue[0])}>
+                  <DeleteIcon className="custom-delete-icon"/>
+                </IconButton>
 
                 {updateLigueId === ligue[0] && (
                   <div>

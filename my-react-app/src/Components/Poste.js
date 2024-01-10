@@ -7,6 +7,12 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import InfoIcon from '@mui/icons-material/Info';
+
+import '../Css/Poste.css'
+
 const PosteComponent = () => {
   const [postes, setPostes] = useState([]);
   const [updatePosteId , setUpdatePOsteId] = useState('');
@@ -89,7 +95,9 @@ const PosteComponent = () => {
               <CardContent>
                 {poste[1]}
                 <Button onClick={() => setUpdatePOsteId(poste[0])}>Update</Button>
-                <Button onClick={() => handleDeletePoste(poste[0])}>Delete</Button>
+                <IconButton aria-label="delete" onClick={() => handleDeletePoste(poste[0])}>
+                  <DeleteIcon className="custom-delete-icon"/>
+                </IconButton>
 
                 {updatePosteId === poste[0] && (
                   <div>

@@ -8,8 +8,10 @@ import Grid from '@mui/material/Grid';
 
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import InfoIcon from '@mui/icons-material/Info';
 
 import TeamPlayersModal from './TeamPlayersModal';
+import '../Css/Equipe.css'
 
 const EquipeList = () => {
   const [team, setEquipe] = useState([]);
@@ -97,10 +99,13 @@ const EquipeList = () => {
               <CardContent>
                 {equipe.team_name}
 
-                <Button onClick={() => handleDetailsClick(equipe.team_id)}>Details</Button>
+                <IconButton aria-label="details" onClick={() => handleDetailsClick(equipe.team_id)}>
+                  <InfoIcon className="custom-icon-button "/>
+                </IconButton>
+
                 
                 <IconButton aria-label="delete" onClick={() => handleDeleteEquipe(equipe.team_id)}>
-                  <DeleteIcon />
+                  <DeleteIcon className="custom-delete-icon"/>
                 </IconButton>
 
                 
