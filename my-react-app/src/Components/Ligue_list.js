@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid';
 
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import InfoIcon from '@mui/icons-material/Info';
 
 import '../Css/Ligue.css'
 

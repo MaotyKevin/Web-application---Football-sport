@@ -5,4 +5,4 @@ flask-RESTful==0.3.9
 flask_restful
 flask-cors==3.0.10  # If you need to handle Cross-Origin Resource Sharing (CORS)
 SQLAlchemy==1.4.28   # If you are working with databases
-
+dotenv

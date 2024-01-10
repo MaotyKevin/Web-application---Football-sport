@@ -1,8 +1,21 @@
 .custom-icon-button {
-    color: cyan;  /* Set the color to your desired value */
+    color: #16697A;  /* Set the color to your desired value */
   }
   
-  .custom-delete-icon {
+.custom-delete-icon {
     color: orange;
   }
+
+.container-add-team {
+    display: flex;
+  }
+  
+.select-add-team , .button-add-team{
+    margin-left: 15px; /* Adjust the margin as needed */
+  }
+  
+
+  
+
+
   
