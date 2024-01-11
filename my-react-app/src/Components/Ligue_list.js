@@ -77,7 +77,7 @@ const LigueList = () => {
 
   const renderAddLiguePopup = () => {
     return (
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
         <TextField
           type="text"
           label="New Ligue Name"
@@ -127,10 +127,19 @@ const LigueList = () => {
             <Card>
               <CardContent>
                 {ligue[1]}
+
+                <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+
                 <Button onClick={() => setUpdateLigueId(ligue[0])}>Update</Button>
+
                 <IconButton aria-label="delete" onClick={() => handleDeleteLigue(ligue[0])}>
                   <DeleteIcon className="custom-delete-icon"/>
                 </IconButton>
+
+
+                </div>
+
+
 
                 {updateLigueId === ligue[0] && (
                   <div>

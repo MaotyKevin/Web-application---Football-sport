@@ -79,7 +79,7 @@ const PosteComponent = () => {
 
   const renderAddPostePopup = () => {
     return (
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
         <TextField
           type="text"
           label="New Poste Name"
@@ -128,10 +128,17 @@ const PosteComponent = () => {
             <Card>
               <CardContent>
                 {poste[1]}
-                <Button onClick={() => setUpdatePOsteId(poste[0])}>Update</Button>
-                <IconButton aria-label="delete" onClick={() => handleDeletePoste(poste[0])}>
-                  <DeleteIcon className="custom-delete-icon"/>
-                </IconButton>
+
+                <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+
+                  <Button onClick={() => setUpdatePOsteId(poste[0])}>Update</Button>
+
+                  <IconButton aria-label="delete" onClick={() => handleDeletePoste(poste[0])}>
+                    <DeleteIcon className="custom-delete-icon"/>
+                  </IconButton>
+
+                </div>
+
 
                 {updatePosteId === poste[0] && (
                   <div>

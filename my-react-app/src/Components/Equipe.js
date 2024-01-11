@@ -86,7 +86,7 @@ const EquipeList = () => {
 
   const renderAddEquipePopup = () => {
     return (
-      <div className="container-add-team">
+      <div className="container-add-team" style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
         <div className="textfield-add-team">
           <TextField
           type="text"
@@ -162,6 +162,8 @@ const EquipeList = () => {
               <CardContent>
                 {equipe.team_name}
 
+                <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+
                 <IconButton aria-label="details" onClick={() => handleDetailsClick(equipe.team_id)}>
                   <InfoIcon className="custom-icon-button "/>
                 </IconButton>
@@ -171,7 +173,8 @@ const EquipeList = () => {
                   <DeleteIcon className="custom-delete-icon"/>
                 </IconButton>
 
-                
+                </div>
+  
               </CardContent>
             </Card>
           </Grid>
