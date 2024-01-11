@@ -9,6 +9,9 @@ import Grid from '@mui/material/Grid';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+import AddIcon from '@mui/icons-material/Add';
+import Autocomplete from '@mui/material/Autocomplete';
+
 import '../Css/Ligue.css'
 
 
@@ -18,6 +21,7 @@ const LigueList = () => {
   const [updatedLigueName, setUpdatedLigueName] = useState('');
   const [newLigue, setNewLigue] = useState('');
   const [isAdding, setIsAdding] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchLigues();
@@ -31,6 +35,13 @@ const LigueList = () => {
       })
       .catch(error => console.error('Error fetching ligues:', error));
   };
+
+  const filteredLigue =
+    searchTerm === null || searchTerm === undefined
+      ? ligues
+      : ligues.filter((ligue) =>
+          ligue[1].toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
   const handleAddLigue = () => {
     apiService.ligue.post(newLigue)
@@ -80,14 +91,38 @@ const LigueList = () => {
 
   return (
     <div>
-      <h1>Ligues</h1>
+   
       {isAdding ? (
         renderAddLiguePopup()
       ) : (
-        <Button onClick={() => setIsAdding(true)}>Add New Ligue</Button>
+      <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+
+        <Button variant="outlined" startIcon={<AddIcon />} onClick={() => setIsAdding(true)}>Nouveau</Button>
+        {/* Autocomplete Search */}
+        <div style={{ marginLeft: '16px' }}>
+
+          <Autocomplete
+            options={ligues.map((ligue) => ligue[1])}
+            value={searchTerm || ''}
+            onChange={(event, newValue) => setSearchTerm(newValue)}
+            renderInput={(params) => (
+              <TextField 
+                {...params}
+                label="Search league" 
+                variant="outlined" 
+                style={{ width: 200 }}
+              />
+            )}
+          />
+
+
+        </div>
+        
+      </div>
+    
       )}
       <Grid container spacing={2}>
-        {ligues.map(ligue => (
+        {filteredLigue.map(ligue => (
           <Grid item xs={12} sm={6} md={4} key={ligue[0]}>
             <Card>
               <CardContent>

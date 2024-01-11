@@ -9,7 +9,10 @@ import Grid from '@mui/material/Grid';
 
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import InfoIcon from '@mui/icons-material/Info';
+
+
+import AddIcon from '@mui/icons-material/Add';
+import Autocomplete from '@mui/material/Autocomplete';
 
 import '../Css/Poste.css'
 
@@ -19,6 +22,7 @@ const PosteComponent = () => {
   const [updatePosteNames , setUpdatePosteNames] = useState('')
   const [newPostes, setNewPoste] = useState('');
   const [isAdding, setIsAdding] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchPostes();
@@ -32,6 +36,13 @@ const PosteComponent = () => {
       console.error('Error fetching postes:', error);
     }
   };
+
+  const filteredPoste =
+    searchTerm === null || searchTerm === undefined
+      ? postes
+      : postes.filter((poste) =>
+          poste[1].toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
   const handleAddPoste = async () => {
     try {
@@ -82,14 +93,37 @@ const PosteComponent = () => {
 
   return (
     <div>
-      <h1>Postes</h1>
+     
       {isAdding ? (
         renderAddPostePopup()
       ) : (
-        <Button onClick={() => setIsAdding(true)}>Add New Poste</Button>
+        <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+
+          <Button variant="outlined" startIcon={<AddIcon />} onClick={() => setIsAdding(true)}>Nouveau</Button>
+                {/* Autocomplete Search */}
+          <div style={{ marginLeft: '16px' }}>
+
+            <Autocomplete
+              options={postes.map((poste) => poste[1])}
+              value={searchTerm || ''}
+              onChange={(event, newValue) => setSearchTerm(newValue)}
+              renderInput={(params) => (
+                <TextField 
+                  {...params}
+                  label="Search poste" 
+                  variant="outlined" 
+                  style={{ width: 200 }}
+                />
+              )}
+            />
+
+
+          </div>
+
+        </div>
       )}
       <Grid container spacing={2}>
-        {postes.map(poste => (
+        {filteredPoste.map(poste => (
           <Grid item xs={12} sm={6} md={4} key={poste[0]}>
             <Card>
               <CardContent>
