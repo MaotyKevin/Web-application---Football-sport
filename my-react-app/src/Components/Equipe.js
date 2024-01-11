@@ -11,6 +11,7 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from '@mui/icons-material/Info';
 import AddIcon from '@mui/icons-material/Add';
+import Autocomplete from '@mui/material/Autocomplete';
 
 import TeamPlayersModal from './TeamPlayersModal';
 import '../Css/Equipe.css'
@@ -21,6 +22,7 @@ const EquipeList = () => {
   const [new_team_name, setNewEquipeName] = useState('');
   const [ligue_id , setNewLigueID] = useState(0);
   const [isAdding, setIsAdding] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const [isModalOpen, setModalOpen] = useState(false); // State for controlling the modal
   const [selectedTeamId, setSelectedTeamId] = useState(null);
@@ -38,6 +40,13 @@ const EquipeList = () => {
       })
       .catch(error => console.error('Error fetching equipe:', error));
   };
+
+  const filteredTeams =
+    searchTerm === null || searchTerm === undefined
+      ? team
+      : team.filter((equipe) =>
+          equipe.team_name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
   const fetchLigueIDS = () => {
     apiService.ligue.get()
@@ -89,10 +98,15 @@ const EquipeList = () => {
 
         <div className="select-add-team">
           <Select
-          label="Ligue ID"
+        
           value={ligue_id}
           onChange={(e) => setNewLigueID(e.target.value)}
         >
+
+          <MenuItem value="" disabled>
+            Select Ligue ID
+          </MenuItem>
+
           {ligueIds.map(id => (
             <MenuItem key={id[0]} value={id[0]}>
               {id[1]}
@@ -113,13 +127,24 @@ const EquipeList = () => {
   return (
     <div>
       <h1>Equipes</h1>
+
+      {/* Autocomplete Search */}
+      <Autocomplete
+        options={team.map((equipe) => equipe.team_name)}
+        value={searchTerm || ''}
+        onChange={(event, newValue) => setSearchTerm(newValue)}
+        renderInput={(params) => (
+          <TextField {...params} label="Search Team" variant="outlined" />
+        )}
+      />
+
       {isAdding ? (
         renderAddEquipePopup()
       ) : (
         <Button variant="outlined" startIcon={<AddIcon />} onClick={() => setIsAdding(true)}>Nouveau</Button>
       )}
       <Grid container spacing={2}>
-        {team.map(equipe => (
+        {filteredTeams.map(equipe => (
           <Grid item xs={12} sm={6} md={4} key={equipe.team_id}>
             <Card>
               <CardContent>

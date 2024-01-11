@@ -10,9 +10,11 @@
     display: flex;
   }
   
-.select-add-team , .button-add-team{
+.select-add-team {
     margin-left: 15px; /* Adjust the margin as needed */
   }
+
+
   
 
   
