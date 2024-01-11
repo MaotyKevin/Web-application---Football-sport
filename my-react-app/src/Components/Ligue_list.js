@@ -12,6 +12,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import Autocomplete from '@mui/material/Autocomplete';
 
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
+
+
 import '../Css/Ligue.css'
 
 
@@ -22,6 +26,10 @@ const LigueList = () => {
   const [newLigue, setNewLigue] = useState('');
   const [isAdding, setIsAdding] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success'); // 'success' or 'error'
+
 
   useEffect(() => {
     fetchLigues();
@@ -44,14 +52,32 @@ const LigueList = () => {
         );
 
   const handleAddLigue = () => {
+
+    if (!newLigue.trim()) {
+      setSnackbarSeverity('error');
+      setSnackbarMessage('Error adding ligue. Please try again.');
+      setSnackbarOpen(true);
+      console.log('Ligue name cannot be empty.');
+      return;
+    }
+
     apiService.ligue.post(newLigue)
       .then(response => {
         console.log(response.data.message);
         fetchLigues();
         setNewLigue('');
         setIsAdding(false);
+        setSnackbarSeverity('success');
+        setSnackbarMessage('Ligue added successfully!');
+        setSnackbarOpen(true);
       })
-      .catch(error => console.error('Error adding ligue:', error));
+      .catch(error => {
+        console.error('Error adding ligue:', error);
+        // Set error Snackbar state
+        setSnackbarSeverity('error');
+        setSnackbarMessage('Error adding ligue. Please try again.');
+        setSnackbarOpen(true);
+      });
   };
 
   const handleDeleteLigue = (ligue_id) => {
@@ -157,6 +183,19 @@ const LigueList = () => {
           </Grid>
         ))}
       </Grid>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000} // Adjust as needed
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <SnackbarContent
+          message={snackbarMessage}
+          style={{ backgroundColor: snackbarSeverity === 'success' ? '#43a047' : '#d32f2f' }}
+        />
+
+      </Snackbar>
+
     </div>
   );
 };

@@ -13,6 +13,9 @@ import InfoIcon from '@mui/icons-material/Info';
 import AddIcon from '@mui/icons-material/Add';
 import Autocomplete from '@mui/material/Autocomplete';
 
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
+
 import TeamPlayersModal from './TeamPlayersModal';
 import '../Css/Equipe.css'
 
@@ -26,6 +29,10 @@ const EquipeList = () => {
 
   const [isModalOpen, setModalOpen] = useState(false); // State for controlling the modal
   const [selectedTeamId, setSelectedTeamId] = useState(null);
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success'); // 'success' or 'error'
 
   useEffect(() => {
     fetchEquipe();
@@ -58,6 +65,23 @@ const EquipeList = () => {
   };
 
   const handleAddEquipe= () => {
+
+    if (!new_team_name.trim()){
+      setSnackbarSeverity('error');
+      setSnackbarMessage('Error adding team. Please try again.');
+      setSnackbarOpen(true);
+      console.log('team name cannot be empty.');
+      return;
+    }
+
+    if (!ligue_id) {
+      setSnackbarSeverity('error');
+      setSnackbarMessage('Error adding team. Please select a valid league.');
+      setSnackbarOpen(true);
+      console.log('Please select a valid league.');
+      return;
+    }
+
     apiService.equipes.post(new_team_name , ligue_id)
       .then(response => {
         console.log(response.data.message);
@@ -65,8 +89,17 @@ const EquipeList = () => {
         setNewEquipeName('');
         setNewLigueID(0);
         setIsAdding(false);
+        setSnackbarSeverity('success');
+        setSnackbarMessage('equipe added successfully!');
+        setSnackbarOpen(true);
       })
-      .catch(error => console.error('Error adding equipe:', error));
+      .catch(error => {
+        console.error('Error adding team :', error);
+        // Set error Snackbar state
+        setSnackbarSeverity('error');
+        setSnackbarMessage('Error adding team. Please try again.');
+        setSnackbarOpen(true);
+      });
   };
 
   const handleDeleteEquipe = (equipe_id) => {
@@ -187,6 +220,18 @@ const EquipeList = () => {
         onClose={() => setModalOpen(false)}
         teamId={selectedTeamId}
       />
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000} // Adjust as needed
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <SnackbarContent
+          message={snackbarMessage}
+          style={{ backgroundColor: snackbarSeverity === 'success' ? '#43a047' : '#d32f2f' }}
+        />
+
+      </Snackbar>
 
 
     </div>

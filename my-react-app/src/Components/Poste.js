@@ -14,6 +14,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import Autocomplete from '@mui/material/Autocomplete';
 
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
+
 import '../Css/Poste.css'
 
 const PosteComponent = () => {
@@ -23,6 +26,10 @@ const PosteComponent = () => {
   const [newPostes, setNewPoste] = useState('');
   const [isAdding, setIsAdding] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success'); // 'success' or 'error'
 
   useEffect(() => {
     fetchPostes();
@@ -46,13 +53,28 @@ const PosteComponent = () => {
 
   const handleAddPoste = async () => {
     try {
+
+      if (!newPostes.trim()) {
+        console.log('Poste name cannot be empty.');
+        setSnackbarSeverity('error');
+        setSnackbarMessage('Error adding poste. Please try again.');
+        setSnackbarOpen(true);
+        return;
+      }
+
       await apiService.poste.post(newPostes);
       fetchPostes();
       setNewPoste('');
       setIsAdding(false);
+      setSnackbarSeverity('success');
+      setSnackbarMessage('Poste added successfully!');
+      setSnackbarOpen(true);
 
     } catch (error) {
       console.error('Error adding poste:', error);
+      setSnackbarSeverity('error');
+      setSnackbarMessage('Error adding poste. Please try again.');
+      setSnackbarOpen(true);
     }
   };
 
@@ -156,6 +178,19 @@ const PosteComponent = () => {
           </Grid>
         ))}
       </Grid>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000} // Adjust as needed
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <SnackbarContent
+          message={snackbarMessage}
+          style={{ backgroundColor: snackbarSeverity === 'success' ? '#43a047' : '#d32f2f' }}
+        />
+
+      </Snackbar>
+
     </div>
   );
 
