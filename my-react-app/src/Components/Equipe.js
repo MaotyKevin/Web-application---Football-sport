@@ -126,22 +126,34 @@ const EquipeList = () => {
 
   return (
     <div>
-      <h1>Equipes</h1>
-
-      {/* Autocomplete Search */}
-      <Autocomplete
-        options={team.map((equipe) => equipe.team_name)}
-        value={searchTerm || ''}
-        onChange={(event, newValue) => setSearchTerm(newValue)}
-        renderInput={(params) => (
-          <TextField {...params} label="Search Team" variant="outlined" />
-        )}
-      />
 
       {isAdding ? (
         renderAddEquipePopup()
       ) : (
-        <Button variant="outlined" startIcon={<AddIcon />} onClick={() => setIsAdding(true)}>Nouveau</Button>
+      <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+          <Button variant="outlined" startIcon={<AddIcon />} onClick={() => setIsAdding(true)}>Nouveau</Button>
+                {/* Autocomplete Search */}
+          <div style={{ marginLeft: '16px' }}>
+
+          <Autocomplete
+            options={team.map((equipe) => equipe.team_name)}
+            value={searchTerm || ''}
+            onChange={(event, newValue) => setSearchTerm(newValue)}
+            renderInput={(params) => (
+              <TextField 
+                {...params}
+                label="Search Team" 
+                variant="outlined" 
+                style={{ width: 200 }}
+              />
+            )}
+          />
+
+
+          </div>
+
+      </div>
+        
       )}
       <Grid container spacing={2}>
         {filteredTeams.map(equipe => (
