@@ -6,13 +6,20 @@
     color: orange;
   }
 
-.container-add-team {
-    display: flex;
-  }
   
 .select-add-team {
     margin-left: 15px; /* Adjust the margin as needed */
   }
+
+.detail-delete , .container-add-team , .add-search{
+    display: flex; 
+    align-items: center ;
+    margin-bottom: 16px ;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
 
 
   

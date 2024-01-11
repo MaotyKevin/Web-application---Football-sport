@@ -77,7 +77,7 @@ const LigueList = () => {
 
   const renderAddLiguePopup = () => {
     return (
-      <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+      <div className="container-add-ligue">
         <TextField
           type="text"
           label="New Ligue Name"
@@ -95,7 +95,7 @@ const LigueList = () => {
       {isAdding ? (
         renderAddLiguePopup()
       ) : (
-      <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+      <div className="add-search">
 
         <Button variant="outlined" startIcon={<AddIcon />} onClick={() => setIsAdding(true)}>Nouveau</Button>
         {/* Autocomplete Search */}
@@ -128,7 +128,7 @@ const LigueList = () => {
               <CardContent>
                 {ligue[1]}
 
-                <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+                <div className="update-delete">
 
                 <Button onClick={() => setUpdateLigueId(ligue[0])}>Update</Button>
 

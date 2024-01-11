@@ -86,7 +86,7 @@ const EquipeList = () => {
 
   const renderAddEquipePopup = () => {
     return (
-      <div className="container-add-team" style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+      <div className="container-add-team" >
         <div className="textfield-add-team">
           <TextField
           type="text"
@@ -130,7 +130,7 @@ const EquipeList = () => {
       {isAdding ? (
         renderAddEquipePopup()
       ) : (
-      <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+      <div className="add-search">
           <Button variant="outlined" startIcon={<AddIcon />} onClick={() => setIsAdding(true)}>Nouveau</Button>
                 {/* Autocomplete Search */}
           <div style={{ marginLeft: '16px' }}>
@@ -162,7 +162,7 @@ const EquipeList = () => {
               <CardContent>
                 {equipe.team_name}
 
-                <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+                <div className="detail-delete" >
 
                 <IconButton aria-label="details" onClick={() => handleDetailsClick(equipe.team_id)}>
                   <InfoIcon className="custom-icon-button "/>

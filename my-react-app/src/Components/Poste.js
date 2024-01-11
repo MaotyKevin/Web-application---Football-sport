@@ -79,7 +79,7 @@ const PosteComponent = () => {
 
   const renderAddPostePopup = () => {
     return (
-      <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+      <div className="container-add-poste">
         <TextField
           type="text"
           label="New Poste Name"
@@ -97,7 +97,7 @@ const PosteComponent = () => {
       {isAdding ? (
         renderAddPostePopup()
       ) : (
-        <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+        <div className="add-search">
 
           <Button variant="outlined" startIcon={<AddIcon />} onClick={() => setIsAdding(true)}>Nouveau</Button>
                 {/* Autocomplete Search */}
@@ -129,7 +129,7 @@ const PosteComponent = () => {
               <CardContent>
                 {poste[1]}
 
-                <div style={{ display: 'flex', alignItems: 'center' , marginBottom: '16px' , justifyContent: 'flex-end', gap: '10px' }}>
+                <div className="update-delete">
 
                   <Button onClick={() => setUpdatePOsteId(poste[0])}>Update</Button>
 

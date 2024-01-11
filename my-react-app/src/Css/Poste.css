@@ -5,4 +5,12 @@
   .custom-delete-icon {
     color: orange;
   }
+
+  .update-delete  , .container-add-poste , .add-search{
+    display: flex; 
+    align-items: center ;
+    margin-bottom: 16px ;
+    justify-content: flex-end;
+    gap: 10px;
+}
   
