@@ -73,6 +73,21 @@ class EquipeResource(Resource):
         except sqlite3.Error as e:
             return ({'error': f"Error adding team: {e}"}), 500
         
+    def put(self , equipe_id):
+        data = request.get_json()
+        nom_equipe = data.get('team_name')
+        ligue_id = data.get('ligue_id')
+        if nom_equipe:
+            try:
+                update_query = "UPDATE Equipe SET team_name = ? , ligue_id = ? WHERE team_id = ? "
+                self.cursor.execute(update_query , (nom_equipe ,ligue_id, equipe_id))
+                self.conn.commit()
+                return jsonify({'Team updated successfuly'})
+            except Exception as e:
+                return jsonify({'error': f"Team update failed - {e}"})
+        else : 
+            return jsonify({'error': 'team_name required'})
+        
 
     
     def __del__(self):

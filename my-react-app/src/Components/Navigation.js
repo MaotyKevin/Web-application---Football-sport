@@ -96,7 +96,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [selectedItem, setSelectedItem] = React.useState('Ligue'); 
+  const [selectedItem, setSelectedItem] = React.useState('Equipes'); 
 
   const handleDrawerOpen = () => {
     setOpen(true);

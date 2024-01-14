@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from '@mui/icons-material/Info';
 import AddIcon from '@mui/icons-material/Add';
 import Autocomplete from '@mui/material/Autocomplete';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 import Snackbar from '@mui/material/Snackbar';
 import SnackbarContent from '@mui/material/SnackbarContent';
@@ -26,6 +27,9 @@ const EquipeList = () => {
   const [ligue_id , setNewLigueID] = useState(0);
   const [isAdding, setIsAdding] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [team_id_modifys , set_teamID_modify] = useState('')
+  const [team_name_modifys , set_team_name_modify] = useState('')
+  const [ligue_id_modifys , set_ligue_id_modify] = useState(0)
 
   const [isModalOpen, setModalOpen] = useState(false); // State for controlling the modal
   const [selectedTeamId, setSelectedTeamId] = useState(null);
@@ -63,6 +67,22 @@ const EquipeList = () => {
       })
       .catch(error => console.error('Error fetching ligues IDS:', error));
   };
+
+  const handleModify = (team_id) => {
+    console.log('Modifying team:', team_id, team_name_modifys, ligue_id_modifys);
+  
+    apiService.equipes.put(team_id, team_name_modifys, ligue_id_modifys)
+      .then(response => {
+        console.log("UPdate team success");
+        fetchEquipe();
+      })
+      .catch(error => console.error('Error updating team', error));
+  
+    set_teamID_modify('');
+    set_team_name_modify('');
+    set_ligue_id_modify(0);
+  };
+  
 
   const handleAddEquipe= () => {
 
@@ -197,6 +217,10 @@ const EquipeList = () => {
 
                 <div className="detail-delete" >
 
+                <IconButton aria-label="modify" onClick={() => set_teamID_modify(equipe.team_id)}>
+                  <ManageAccountsIcon className="custom-modify-button "/>
+                </IconButton>
+
                 <IconButton aria-label="details" onClick={() => handleDetailsClick(equipe.team_id)}>
                   <InfoIcon className="custom-icon-button "/>
                 </IconButton>
@@ -207,6 +231,39 @@ const EquipeList = () => {
                 </IconButton>
 
                 </div>
+
+                {team_id_modifys === equipe.team_id && (
+                  <div>
+                    <TextField
+                      type="text"
+                      label={`${equipe.team_name}`}
+                      value={team_name_modifys}
+                      onChange={(e) => set_team_name_modify(e.target.value)}
+                    />
+
+        <div className="select-modify-team_ligueID">
+          <Select
+        
+          value={ligue_id_modifys}
+          onChange={(e) => set_ligue_id_modify(e.target.value)}
+          >
+
+            <MenuItem value="" disabled>
+              Select Ligue ID
+            </MenuItem>
+
+            {ligueIds.map(id => (
+              <MenuItem key={id[0]} value={id[0]}>
+                {id[1]}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+
+
+                    <Button onClick={() => handleModify(equipe.team_id)}>Save</Button>
+                  </div>
+                )}
   
               </CardContent>
             </Card>
@@ -232,6 +289,8 @@ const EquipeList = () => {
         />
 
       </Snackbar>
+
+    
 
 
     </div>
