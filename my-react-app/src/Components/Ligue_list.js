@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 import AddIcon from '@mui/icons-material/Add';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -156,7 +157,13 @@ const LigueList = () => {
 
                 <div className="update-delete">
 
-                <Button onClick={() => setUpdateLigueId(ligue[0])}>Update</Button>
+                <IconButton aria-label="modify" onClick={() => setUpdateLigueId(ligue[0])}>
+                  <ManageAccountsIcon
+                  className="custom-modify-icon"
+                  
+                  />
+
+                </IconButton>
 
                 <IconButton aria-label="delete" onClick={() => handleDeleteLigue(ligue[0])}>
                   <DeleteIcon className="custom-delete-icon"/>

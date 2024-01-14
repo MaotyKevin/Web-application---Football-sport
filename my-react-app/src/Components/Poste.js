@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 import AddIcon from '@mui/icons-material/Add';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -153,7 +153,9 @@ const PosteComponent = () => {
 
                 <div className="update-delete">
 
-                  <Button onClick={() => setUpdatePOsteId(poste[0])}>Update</Button>
+                  <IconButton aria-label="modify" onClick={() => setUpdatePOsteId(poste[0])}>
+                    <ManageAccountsIcon className="custom-modify-icon"/>
+                  </IconButton>
 
                   <IconButton aria-label="delete" onClick={() => handleDeletePoste(poste[0])}>
                     <DeleteIcon className="custom-delete-icon"/>
