@@ -10,7 +10,9 @@ from Model.EquipeLigue_api import EquipeLigueResource
 from Model.Poste_api import Poste_Resource
 from Model.Match_api import Match_Ressource
 from Model.EquipeMatch_api import EquipeMatchOne_Resource , EquipeMatchTwo_Resource
-from Model.EquipeTitulaire_api import Equipe_titulaireOne_Resource , Equipe_titulaireTwo_Resource
+from Model.EquipeTitulaire_api import Equipe_titulaireOne_Resource , Equipe_titulaireTwo_Resource , Equipe_titulaireThree_Resource
+from Model.Titulaire_api import TitulaireResource , TitulaireINdividualResource
+
 
 load_dotenv()
 app = Flask(__name__)
@@ -20,6 +22,10 @@ cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}} )
 api.add_resource(LigueResource, '/ligue', '/ligue/<int:ligue_id>')
 
 api.add_resource(EquipeResource, '/equipes', '/equipes/<int:equipe_id>' )
+
+api.add_resource(TitulaireResource, '/titulaire', '/titulaire/<int:titulaire_id>' )
+
+api.add_resource(TitulaireINdividualResource, '/titulaireIndividual/<int:titulaire_id>' )
 
 api.add_resource(EquipeINdividualResource, '/equipeIndividual/<int:team_id>' )
 
@@ -36,6 +42,8 @@ api.add_resource(EquipeMatchTwo_Resource , '/equipesMatchTwo/<int:team_id>'  )
 api.add_resource(Equipe_titulaireOne_Resource , '/equipesTitulaireOne/<int:team_id>' )
 
 api.add_resource(Equipe_titulaireTwo_Resource , '/equipesTitulaireTwo/<int:team_id>'  )
+
+api.add_resource(Equipe_titulaireThree_Resource , '/equipesTitulaireThree/<int:titulaire_id>'  )
 
 
 debug = os.getenv('DEBUG', 'False').lower() == 'true'

@@ -78,4 +78,27 @@ class Equipe_titulaireTwo_Resource(Resource):
     def __del__(self):
         self.conn.close()
 
+class Equipe_titulaireThree_Resource(Resource):
+    def __init__(self):
+        self.handle = Handle_database()
+        self.conn, self.cursor = self.handle.connecterBD()
+
+    def get(self , titulaire_id):
+       
+        query = """
+            SELECT Equipe.team_id, Equipe.team_name
+            FROM Equipe
+            JOIN EquipeTitulaire ON EquipeTitulaire.team_id = Equipe.team_id
+            JOIN Titulaire ON Titulaire.titulaire_id = EquipeTitulaire.titulaire_id
+            WHERE Titulaire.titulaire_id = ?;
+
+        """
+
+        self.cursor.execute(query , (titulaire_id,))
+        data = self.cursor.fetchall()
+        return data
+    
+    def __del__(self):
+        self.conn.close()
+
 
