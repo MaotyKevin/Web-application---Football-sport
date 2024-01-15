@@ -73,10 +73,10 @@ const EquipeList = () => {
   
     apiService.equipes.put(team_id, team_name_modifys, ligue_id_modifys)
       .then(response => {
-        console.log("UPdate team success");
+        console.log("Update club success");
         fetchEquipe();
       })
-      .catch(error => console.error('Error updating team', error));
+      .catch(error => console.error('Error updating club', error));
   
     set_teamID_modify('');
     set_team_name_modify('');
@@ -88,15 +88,15 @@ const EquipeList = () => {
 
     if (!new_team_name.trim()){
       setSnackbarSeverity('error');
-      setSnackbarMessage('Error adding team. Please try again.');
+      setSnackbarMessage('Error adding club. Please try again.');
       setSnackbarOpen(true);
-      console.log('team name cannot be empty.');
+      console.log('Club name cannot be empty.');
       return;
     }
 
     if (!ligue_id) {
       setSnackbarSeverity('error');
-      setSnackbarMessage('Error adding team. Please select a valid league.');
+      setSnackbarMessage('Error adding Club. Please select a valid league.');
       setSnackbarOpen(true);
       console.log('Please select a valid league.');
       return;
@@ -110,14 +110,14 @@ const EquipeList = () => {
         setNewLigueID(0);
         setIsAdding(false);
         setSnackbarSeverity('success');
-        setSnackbarMessage('equipe added successfully!');
+        setSnackbarMessage('Club added successfully!');
         setSnackbarOpen(true);
       })
       .catch(error => {
-        console.error('Error adding team :', error);
+        console.error('Error adding club :', error);
         // Set error Snackbar state
         setSnackbarSeverity('error');
-        setSnackbarMessage('Error adding team. Please try again.');
+        setSnackbarMessage('Error adding club. Please try again.');
         setSnackbarOpen(true);
       });
   };
@@ -143,7 +143,7 @@ const EquipeList = () => {
         <div className="textfield-add-team">
           <TextField
           type="text"
-          label="New equipe Name"
+          label="New club name"
           value={new_team_name}
           onChange={(e) => setNewEquipeName(e.target.value)}
         />
@@ -195,7 +195,7 @@ const EquipeList = () => {
             renderInput={(params) => (
               <TextField 
                 {...params}
-                label="Search Team" 
+                label="Search club" 
                 variant="outlined" 
                 style={{ width: 200 }}
               />

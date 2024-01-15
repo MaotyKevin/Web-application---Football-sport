@@ -19,12 +19,14 @@ import ListItemText from '@mui/material/ListItemText';
 import EmojiFlagsIcon from '@mui/icons-material/EmojiFlags';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
 
 
 
 import PosteComponent from './Poste';
 import LigueList from './Ligue_list';
 import EquipeList from './Equipe';
+import TitulaireList from './Titulaire';
 
 const drawerWidth = 240;
 
@@ -96,7 +98,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [selectedItem, setSelectedItem] = React.useState('Equipes'); 
+  const [selectedItem, setSelectedItem] = React.useState('Club'); 
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -117,8 +119,10 @@ export default function MiniDrawer() {
         return <LigueList />;
       case 'Poste':
         return <PosteComponent />;
-      case 'Equipes':
+      case 'Club':
         return <EquipeList />;
+      case 'Titulaire':
+        return <TitulaireList/>;
       default:
         return null;
     }
@@ -163,7 +167,7 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Ligue', 'Poste', 'Equipes'].map((text, index) => (
+          {['Ligue', 'Poste', 'Club' , 'Titulaire'].map((text, index) => (
             <ListItem
               key={text}
               disablePadding
@@ -185,7 +189,8 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 3 === 0 ? <EmojiFlagsIcon /> : index % 3 === 1 ? <SportsSoccerIcon /> : <Diversity3Icon />}
+                  {index % 4 === 0 ? <EmojiFlagsIcon /> : index % 4 === 1 ? <SportsSoccerIcon /> : index % 4 === 2 ?<Diversity3Icon /> : <AccessibilityIcon/> }
+
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>

@@ -22,6 +22,15 @@ const apiEndpoints = {
     getById: (equipe_id) => `/equipes/${equipe_id}`,
   },
 
+  titulaire: {
+    getAll: '/titulaire',
+    getById : (titulaire_id) => `/titulaire/${titulaire_id}`,
+  },
+
+  titulaireIndividuel: {
+    getById : (titulaire_id) => `/titulaireIndividual/${titulaire_id}` ,
+  },
+
   individual: {
     getById: (equipe_id) => `/equipeIndividual/${equipe_id}`
   },
@@ -45,6 +54,8 @@ const apiEndpoints = {
 
   equipeTitulaireTwo: (team_id) => `/equipesTitulaireTwo/${team_id}`,
 
+  equipesTitulaireThree: (titulaire_id) => `/equipesTitulaireThree/${titulaire_id}`,
+
 };
 
 const apiService = {
@@ -66,8 +77,19 @@ const apiService = {
     put: (equipe_id , team_name_modifys , ligue_id_modifys) => api.put(apiEndpoints.equipes.getById(equipe_id) , {team_name : team_name_modifys , ligue_id: ligue_id_modifys}),
   },
 
+  titulaire: {
+    get: () => api.get(apiEndpoints.titulaire.getAll),
+    delete: (titulaire_id) => api.delete(apiEndpoints.titulaire.getById(titulaire_id)),
+    post: (new_titulaire_name, new_poste_id) => api.post(apiEndpoints.titulaire.getAll , {titulaire_nom: new_titulaire_name , poste_id : new_poste_id}),
+    put: (titulaire_id , titulaire_name_modifys , poste_id_modifys) => api.put(apiEndpoints.titulaire.getById(titulaire_id) , {titulaire_nom : titulaire_name_modifys , poste_id: poste_id_modifys}),
+  },
+
   individual: {
     get : (equipe_id) => api.get(apiEndpoints.individual.getById(equipe_id))
+  },
+
+  titulaireIndividuel: {
+    get : (titulaire_id) => api.get(apiEndpoints.titulaireIndividuel.getById(titulaire_id))
   },
 
 
@@ -103,6 +125,9 @@ const apiService = {
 
   equipeTitulaireTwo: {
     get : (team_id) => api.get(apiEndpoints.equipeTitulaireTwo(team_id)) },
+
+  equipesTitulaireThree: {
+    get : (titulaire_id) => api.get(apiEndpoints.equipesTitulaireThree(titulaire_id)) },
 
 };
 
