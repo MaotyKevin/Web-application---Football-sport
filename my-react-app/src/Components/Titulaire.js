@@ -208,7 +208,7 @@ const TitulaireList = () => {
           <Grid item xs={12} sm={6} md={4} key={titulaire.titulaire_id}>
             <Card>
               <CardContent>
-                {titulaire.titulaire_nom}
+                {titulaire.titulaire_nom} - {titulaire.poste_nom}
 
                 <div className="detail-delete" >
 
